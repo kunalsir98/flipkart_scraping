@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>Scraped Results</h2>
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Rating</th>
+                    <th>Comment</th>
+                    <th>Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(ratings|length) %}
+                    <tr>
+                        <td>{{ customer_names[i] if customer_names|length > i else '' }}</td>
+                        <td>{{ ratings[i] if ratings|length > i else '' }}</td>
+                        <td>{{ comments[i] if comments|length > i else '' }}</td>
+                        <td>{{ questions[i] if questions|length > i else '' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="actions">
+            <a href="{{ url_for('download_csv', search=request.form['search']) }}" class="btn">Download CSV</a>
+            <a href="/" class="btn">Go Back</a>
+        </div>
+    </div>
+{% endblock %}
